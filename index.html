@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EcoMarket - Startup colombiana que conecta pequeños productores locales de alimentos orgánicos y artículos sostenibles con consumidores responsables.">
+  <meta name="theme-color" content="#2e7d32">
+  <title>EcoMarket | Plataforma de Comercio Sostenible y Panel de Inventario</title>
+
+  <!-- Estilos CSS Vanilla -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Tipografía Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Librería Chart.js para el gráfico estadístico interactivo (Fase 5, Paso 6 Bonus) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+</head>
+<body class="app-body">
+
+  <!-- ======================================================================
+       BARRA SUPERIOR GLOBAL: SELECTOR DE MODO (LANDING / DASHBOARD)
+       ====================================================================== -->
+  <div class="global-view-switch" id="globalViewSwitch" role="navigation" aria-label="Cambio de vista principal">
+    <div class="container view-switch-container">
+      <div class="view-switch-brand">
+        <span class="view-switch-badge">🌿 EcoMarket Colombia • Comercio Sostenible</span>
+      </div>
+      <div class="view-switch-tabs" role="tablist">
+        <button type="button" class="tab-switch active" id="btnSwitchLanding" role="tab" aria-selected="true" aria-controls="vistaLanding">
+          <span aria-hidden="true">🌱</span> Tienda (Landing Page)
+        </button>
+        <button type="button" class="tab-switch" id="btnSwitchDashboard" role="tab" aria-selected="false" aria-controls="vistaDashboard">
+          <span aria-hidden="true">📊</span> Panel Administrativo (Dashboard)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       VISTA 1: LANDING PAGE DE ECOMARKET (FASE 1)
+       ====================================================================== -->
+  <div id="vistaLanding" class="vista-seccion active" role="tabpanel" aria-labelledby="btnSwitchLanding">
+    <!-- Cabecera de la Landing -->
+    <header class="header-main" id="inicio">
+      <div class="header-container container">
+        <a href="#inicio" class="brand-logo" aria-label="Inicio de EcoMarket">
+          <span class="brand-icon" aria-hidden="true">🌱</span>
+          <span class="brand-name">Eco<span class="brand-highlight">Market</span></span>
+        </a>
+
+        <!-- Botón menú móvil landing -->
+        <button 
+          type="button" 
+          class="landing-nav-toggle" 
+          id="landingNavToggle" 
+          aria-label="Abrir menú de navegación" 
+          aria-expanded="false" 
+          aria-controls="landingNavMenu"
+        >
+          <span class="toggle-icon" aria-hidden="true">☰</span>
+        </button>
+
+        <!-- Navegación de secciones -->
+        <nav class="nav-main" id="landingNavMenu" aria-label="Navegación de la tienda">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="#inicio" class="nav-link active">Inicio</a></li>
+            <li class="nav-item"><a href="#categorias" class="nav-link">Categorías</a></li>
+            <li class="nav-item"><a href="#productos-destacados" class="nav-link">Destacados</a></li>
+            <li class="nav-item"><a href="#impacto" class="nav-link">Impacto Local</a></li>
+            <li class="nav-item"><a href="#testimonios" class="nav-link">Productores</a></li>
+            <li class="nav-item"><a href="#suscripcion" class="nav-link">Boletín</a></li>
+          </ul>
+          <div class="nav-actions">
+            <button type="button" class="btn btn-secondary btn-sm" id="btnNavIrDashboard" aria-label="Ir al panel administrativo de EcoMarket">
+              <span aria-hidden="true">📊</span> Panel Admin
+            </button>
+            <a href="#productos-destacados" class="btn btn-primary btn-sm">Explorar productos</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Contenido Principal Landing -->
+    <main>
+      <!-- Hero Section -->
+      <section class="hero-section" id="hero">
+        <div class="container hero-container">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <span class="badge-dot" aria-hidden="true"></span>
+              <span>100% Origen Colombiano &amp; Sostenible</span>
+            </div>
+            <h1 class="hero-title">
+              Conectamos la riqueza del campo colombiano con tu hogar
+            </h1>
+            <p class="hero-description">
+              En EcoMarket apoyamos a pequeños productores campesinos y emprendedores ecológicos de Boyacá, Santander, Cundinamarca y más regiones. Alimentos orgánicos, despensa limpia y artículos sostenibles a un precio justo para todos.
+            </p>
+            <div class="hero-actions">
+              <a href="#categorias" class="btn btn-primary btn-lg">Explorar catálogo</a>
+              <button type="button" class="btn btn-outline btn-lg" id="btnHeroIrDashboard">Acceso administrativo</button>
+            </div>
+            <div class="hero-metrics">
+              <div class="metric-item">
+                <strong class="metric-number">+150</strong>
+                <span class="metric-label">Familias campesinas</span>
+              </div>
+              <div class="metric-divider" aria-hidden="true"></div>
+              <div class="metric-item">
+                <strong class="metric-number">100%</strong>
+                <span class="metric-label">Orgánico y natural</span>
+              </div>
+              <div class="metric-divider" aria-hidden="true"></div>
+              <div class="metric-item">
+                <strong class="metric-number">0%</strong>
+                <span class="metric-label">Intermediarios abusivos</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-image-wrapper">
+              <img 
+                src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80" 
+                alt="Cesta con verduras frescas y frutas orgánicas cosechadas en el campo colombiano" 
+                class="hero-image"
+                loading="lazy"
+              >
+              <div class="floating-card floating-card-top">
+                <span class="card-icon" aria-hidden="true">🥑</span>
+                <div>
+                  <strong>Cosecha fresca</strong>
+                  <p>Directo del productor a tu mesa</p>
+                </div>
+              </div>
+              <div class="floating-card floating-card-bottom">
+                <span class="card-icon" aria-hidden="true">♻️</span>
+                <div>
+                  <strong>Empaques biodegradables</strong>
+                  <p>Cero plástico de un solo uso</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categorías -->
+      <section class="section section-categories" id="categorias" aria-labelledby="titulo-categorias">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-badge">Variedad Consciente</span>
+            <h2 class="section-title" id="titulo-categorias">Nuestras Categorías Sostenibles</h2>
+            <p class="section-subtitle">
+              Cada producto ha sido seleccionado cuidando la salud de tu familia y la regeneración de nuestros suelos.
+            </p>
+          </div>
+
+          <div class="categories-grid">
+            <article class="category-card">
+              <div class="category-image-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=500&q=80" 
+                  alt="Frutas frescas y hortalizas verdes sin pesticidas" 
+                  class="category-img"
+                  loading="lazy"
+                >
+                <span class="category-tag">Cosecha del día</span>
+              </div>
+              <div class="category-content">
+                <h3 class="category-title">Frutas y verduras</h3>
+                <p class="category-description">
+                  Hortalizas libres de agroquímicos, frutas de temporada y tubérculos cultivados mediante técnicas de agroecología.
+                </p>
+                <button type="button" class="category-link btn-link-dashboard" data-cat="Frutas y verduras">Ver catálogo &rarr;</button>
+              </div>
+            </article>
+
+            <article class="category-card">
+              <div class="category-image-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=500&q=80" 
+                  alt="Miel pura, café artesanal y semillas en granos orgánicos" 
+                  class="category-img"
+                  loading="lazy"
+                >
+                <span class="category-tag">Artesanal</span>
+              </div>
+              <div class="category-content">
+                <h3 class="category-title">Despensa</h3>
+                <p class="category-description">
+                  Miel de abejas pura, café especial de origen, panela pulverizada, aceites prensados en frío y granos limpios.
+                </p>
+                <button type="button" class="category-link btn-link-dashboard" data-cat="Despensa">Ver catálogo &rarr;</button>
+              </div>
+            </article>
+
+            <article class="category-card">
+              <div class="category-image-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=500&q=80" 
+                  alt="Jabones botánicos artesanales, champú sólido y cremas naturales" 
+                  class="category-img"
+                  loading="lazy"
+                >
+                <span class="category-tag">Bienestar</span>
+              </div>
+              <div class="category-content">
+                <h3 class="category-title">Cuidado personal</h3>
+                <p class="category-description">
+                  Jabones botánicos saponificados en frío, champús sólidos sin sulfatos, desodorantes libres de aluminio y cremas hidratantes.
+                </p>
+                <button type="button" class="category-link btn-link-dashboard" data-cat="Cuidado personal">Ver catálogo &rarr;</button>
+              </div>
+            </article>
+
+            <article class="category-card">
+              <div class="category-image-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&w=500&q=80" 
+                  alt="Bolsas de tela de algodón reutilizables y cepillos de bambú" 
+                  class="category-img"
+                  loading="lazy"
+                >
+                <span class="category-tag">Zero Waste</span>
+              </div>
+              <div class="category-content">
+                <h3 class="category-title">Hogar sostenible</h3>
+                <p class="category-description">
+                  Bolsas de tela de algodón, cepillos biodegradables de bambú, envolturas de cera de abejas y detergentes limpios.
+                </p>
+                <button type="button" class="category-link btn-link-dashboard" data-cat="Hogar sostenible">Ver catálogo &rarr;</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Productos Destacados -->
+      <section class="section section-featured" id="productos-destacados" aria-labelledby="titulo-destacados">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-badge">Favoritos de la comunidad</span>
+            <h2 class="section-title" id="titulo-destacados">Productos Destacados</h2>
+            <p class="section-subtitle">
+              Conoce los artículos más valorados por nuestros consumidores conscientes en toda Colombia.
+            </p>
+          </div>
+
+          <div class="featured-grid">
+            <!-- Tarjeta 1 -->
+            <article class="product-featured-card">
+              <div class="featured-img-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=500&q=80" 
+                  alt="Frasco de Miel de abejas pura 500 g de Apiario La Montaña" 
+                  class="product-featured-img"
+                  loading="lazy"
+                >
+                <span class="status-badge badge-success">Disponible</span>
+              </div>
+              <div class="product-featured-body">
+                <div class="product-meta">
+                  <span class="badge-category">Despensa</span>
+                  <span class="product-city">📍 Bucaramanga</span>
+                </div>
+                <h3 class="product-featured-title">Miel de abejas pura 500 g</h3>
+                <p class="product-producer">Productor: <strong>Apiario La Montaña</strong></p>
+                <div class="product-price-row">
+                  <span class="product-price">$ 28.000 COP</span>
+                  <span class="stock-pill">18 disponibles</span>
+                </div>
+                <div class="card-footer-action">
+                  <button type="button" class="btn btn-outline btn-sm w-100 btn-link-dashboard">Gestionar en Panel</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Tarjeta 2 -->
+            <article class="product-featured-card">
+              <div class="featured-img-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=500&q=80" 
+                  alt="Café especial orgánico molido 340 g de Café El Roble" 
+                  class="product-featured-img"
+                  loading="lazy"
+                >
+                <span class="status-badge badge-warning">Stock bajo</span>
+              </div>
+              <div class="product-featured-body">
+                <div class="product-meta">
+                  <span class="badge-category">Despensa</span>
+                  <span class="product-city">📍 Floridablanca</span>
+                </div>
+                <h3 class="product-featured-title">Café especial orgánico 340 g</h3>
+                <p class="product-producer">Productor: <strong>Café El Roble</strong></p>
+                <div class="product-price-row">
+                  <span class="product-price">$ 32.000 COP</span>
+                  <span class="stock-pill">¡Últimas 5 unidades!</span>
+                </div>
+                <div class="card-footer-action">
+                  <button type="button" class="btn btn-outline btn-sm w-100 btn-link-dashboard">Gestionar en Panel</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Tarjeta 3 -->
+            <article class="product-featured-card">
+              <div class="featured-img-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=500&q=80" 
+                  alt="Jabón artesanal botánico de caléndula y avena de Manos de Tierra" 
+                  class="product-featured-img"
+                  loading="lazy"
+                >
+                <span class="status-badge badge-success">Disponible</span>
+              </div>
+              <div class="product-featured-body">
+                <div class="product-meta">
+                  <span class="badge-category">Cuidado personal</span>
+                  <span class="product-city">📍 Girón</span>
+                </div>
+                <h3 class="product-featured-title">Jabón artesanal de caléndula</h3>
+                <p class="product-producer">Productor: <strong>Manos de Tierra</strong></p>
+                <div class="product-price-row">
+                  <span class="product-price">$ 14.000 COP</span>
+                  <span class="stock-pill">24 disponibles</span>
+                </div>
+                <div class="card-footer-action">
+                  <button type="button" class="btn btn-outline btn-sm w-100 btn-link-dashboard">Gestionar en Panel</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Tarjeta 4 -->
+            <article class="product-featured-card">
+              <div class="featured-img-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=500&q=80" 
+                  alt="Canasta familiar de verduras agroecológicas de Huerta Viva" 
+                  class="product-featured-img"
+                  loading="lazy"
+                >
+                <span class="status-badge badge-danger">Agotado</span>
+              </div>
+              <div class="product-featured-body">
+                <div class="product-meta">
+                  <span class="badge-category">Frutas y verduras</span>
+                  <span class="product-city">📍 Tunja</span>
+                </div>
+                <h3 class="product-featured-title">Canasta familiar de verduras</h3>
+                <p class="product-producer">Productor: <strong>Huerta Viva</strong></p>
+                <div class="product-price-row">
+                  <span class="product-price">$ 35.000 COP</span>
+                  <span class="stock-pill stock-out">Agotado temporalmente</span>
+                </div>
+                <div class="card-footer-action">
+                  <button type="button" class="btn btn-outline btn-sm w-100 btn-link-dashboard">Gestionar en Panel</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="text-center mt-xl">
+            <button type="button" class="btn btn-primary btn-lg" id="btnExplorar35">
+              Consultar los 35 productos en el Panel Administrativo &rarr;
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bloque Impacto: Compra local, genera impacto -->
+      <section class="section section-impact" id="impacto" aria-labelledby="titulo-impacto">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-badge badge-light">Comercio Justo y Ético</span>
+            <h2 class="section-title text-white" id="titulo-impacto">Compra local, genera impacto</h2>
+            <p class="section-subtitle text-white-muted">
+              Cada compra en EcoMarket activa una cadena de valor donde ganan tanto los consumidores como las familias campesinas colombianas.
+            </p>
+          </div>
+
+          <div class="impact-grid">
+            <div class="impact-column">
+              <div class="impact-card-header">
+                <span class="impact-icon" aria-hidden="true">🥗</span>
+                <h3>Beneficios para los Consumidores</h3>
+              </div>
+              <ul class="impact-list">
+                <li><strong>Alimentos más frescos y nutritivos:</strong> Cosechados horas antes de la entrega con alto valor biológico.</li>
+                <li><strong>Sin químicos ni tóxicos:</strong> 100% libre de pesticidas, fungicidas sintéticos o ceras artificiales.</li>
+                <li><strong>Trazabilidad y transparencia:</strong> Conoces con exactitud el municipio y la familia que sembró tu alimento.</li>
+                <li><strong>Precios justos y accesibles:</strong> Sin márgenes abusivos de intermediación minorista.</li>
+              </ul>
+            </div>
+
+            <div class="impact-column">
+              <div class="impact-card-header">
+                <span class="impact-icon" aria-hidden="true">🤝</span>
+                <h3>Beneficios para los Productores</h3>
+              </div>
+              <ul class="impact-list">
+                <li><strong>Ingreso digno y directo:</strong> El 85% de cada venta va directo a las manos del campesino.</li>
+                <li><strong>Mercados digitales transparentes:</strong> Acceso a clientes en ciudades capitales sin peajes logísticos desmedidos.</li>
+                <li><strong>Impulso a la agroecología:</strong> Incentivos reales para quienes regeneran la tierra y protegen páramos y ríos.</li>
+                <li><strong>Estabilidad comunitaria:</strong> Fortalecimiento del tejido social y permanencia digna en el campo colombiano.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonios de Productores -->
+      <section class="section section-testimonials" id="testimonios" aria-labelledby="titulo-testimonios">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-badge">Historias Reales</span>
+            <h2 class="section-title" id="titulo-testimonios">Nuestros Productores Aliados</h2>
+            <p class="section-subtitle">
+              Detrás de cada cosecha y producto artesanal hay familias colombianas comprometidas con el planeta.
+            </p>
+          </div>
+
+          <div class="testimonials-grid">
+            <article class="testimonial-card">
+              <div class="testimonial-rating" aria-label="5 estrellas">⭐⭐⭐⭐⭐</div>
+              <blockquote class="testimonial-quote">
+                &ldquo;Antes de EcoMarket vendíamos nuestra miel a intermediarios que pagaban una miseria. Hoy llegamos a familias conscientes que valoran a las abejas y al campo santandereano.&rdquo;
+              </blockquote>
+              <div class="testimonial-author">
+                <img 
+                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" 
+                  alt="Alfonso Gómez, apicultor aliado de EcoMarket" 
+                  class="author-photo"
+                  loading="lazy"
+                >
+                <div>
+                  <strong class="author-name">Alfonso Gómez</strong>
+                  <span class="author-role">Apiario La Montaña • Bucaramanga</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="testimonial-rating" aria-label="5 estrellas">⭐⭐⭐⭐⭐</div>
+              <blockquote class="testimonial-quote">
+                &ldquo;Cultivar hortalizas agroecológicas en Boyacá era un reto. El panel de EcoMarket nos permitió organizar pedidos semanales y producir sin desperdiciar ni una sola cosecha.&rdquo;
+              </blockquote>
+              <div class="testimonial-author">
+                <img 
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" 
+                  alt="Carmen Sepúlveda, productora agroecológica de Huerta Viva" 
+                  class="author-photo"
+                  loading="lazy"
+                >
+                <div>
+                  <strong class="author-name">Carmen Sepúlveda</strong>
+                  <span class="author-role">Huerta Viva • Tunja, Boyacá</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="testimonial-rating" aria-label="5 estrellas">⭐⭐⭐⭐⭐</div>
+              <blockquote class="testimonial-quote">
+                &ldquo;Elaboramos jabón botánico puro saponificado en frío. En EcoMarket encontramos una comunidad que valora la cosmética limpia y el comercio justo.&rdquo;
+              </blockquote>
+              <div class="testimonial-author">
+                <img 
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" 
+                  alt="Mateo Duarte, artesano botánico de Manos de Tierra" 
+                  class="author-photo"
+                  loading="lazy"
+                >
+                <div>
+                  <strong class="author-name">Mateo Duarte</strong>
+                  <span class="author-role">Manos de Tierra • Girón, Santander</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formulario de Suscripción (Boletín) -->
+      <section class="section section-newsletter" id="suscripcion" aria-labelledby="titulo-boletin">
+        <div class="container">
+          <div class="newsletter-box">
+            <div class="newsletter-text">
+              <span class="newsletter-tag">Únete al movimiento</span>
+              <h2 class="newsletter-title" id="titulo-boletin">Recibe cosechas frescas e historias del campo cada semana</h2>
+              <p class="newsletter-desc">
+                Suscríbete a nuestro boletín comunitario y recibe un <strong>10% de descuento</strong> en tu primer pedido sostenible, además de recetas de temporada y novedades de productores locales.
+              </p>
+            </div>
+
+            <form class="newsletter-form" id="formSuscripcion" novalidate>
+              <div class="form-group">
+                <label for="nombreSuscriptor" class="form-label">Nombre completo</label>
+                <input 
+                  type="text" 
+                  id="nombreSuscriptor" 
+                  name="nombre" 
+                  class="form-input" 
+                  placeholder="Ej. Valentina Rojas" 
+                  required 
+                  minlength="3"
+                >
+                <span class="error-msg" id="errorNombreSuscriptor" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="correoSuscriptor" class="form-label">Correo electrónico</label>
+                <input 
+                  type="email" 
+                  id="correoSuscriptor" 
+                  name="email" 
+                  class="form-input" 
+                  placeholder="valentina@ejemplo.com" 
+                  required
+                >
+                <span class="error-msg" id="errorCorreoSuscriptor" aria-live="polite"></span>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-submit">
+                Quiero unirme a EcoMarket
+              </button>
+
+              <div class="form-feedback" id="feedbackSuscripcion" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Landing -->
+    <footer class="footer-main">
+      <div class="container footer-container">
+        <div class="footer-col footer-col-brand">
+          <a href="#inicio" class="brand-logo footer-logo" aria-label="Inicio EcoMarket">
+            <span class="brand-icon" aria-hidden="true">🌱</span>
+            <span class="brand-name">Eco<span class="brand-highlight">Market</span></span>
+          </a>
+          <p class="footer-mission">
+            Plataforma colombiana de comercio sostenible que conecta pequeños productores locales de alimentos orgánicos y artículos sostenibles con consumidores responsables.
+          </p>
+          <p class="footer-country">🇨🇴 Hecho con orgullo en Colombia</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#categorias">Categorías</a></li>
+            <li><a href="#productos-destacados">Productos Destacados</a></li>
+            <li><a href="#impacto">Impacto Comunitario</a></li>
+            <li><a href="#testimonios">Productores Aliados</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Gestión &amp; Plataforma</h4>
+          <ul class="footer-links">
+            <li><a href="#dashboard" class="btn-link-dashboard">Panel de Administración (CRUD)</a></li>
+            <li><a href="#dashboard" class="btn-link-dashboard">Indicadores KPI</a></li>
+            <li><a href="#dashboard" class="btn-link-dashboard">Inventario Completo</a></li>
+            <li><a href="#dashboard" class="btn-link-dashboard">Gráfico de Categorías</a></li>
+            <li><a href="productos.json" target="_blank" rel="noopener">Dataset JSON (35 Productos)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Contacto &amp; Redes</h4>
+          <p class="footer-contact-item">📧 contacto@ecomarket.co</p>
+          <p class="footer-contact-item">📞 +57 (607) 698-4321</p>
+          <p class="footer-contact-item">📍 Bucaramanga, Santander - Colombia</p>
+          <div class="social-links">
+            <a href="#inicio" class="social-link" aria-label="Instagram">Instagram</a>
+            <a href="#inicio" class="social-link" aria-label="Facebook">Facebook</a>
+            <a href="#inicio" class="social-link" aria-label="LinkedIn">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container footer-bottom-container">
+          <p class="copyright">
+            &copy; 2026 EcoMarket Colombia. Proyecto práctico de Análisis y Desarrollo de Software (ADSO).
+          </p>
+          <p class="footer-credits">
+            Desarrollado con HTML5 semántico, CSS3 Vanilla y JavaScript moderno.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ======================================================================
+       VISTA 2: DASHBOARD ADMINISTRATIVO (FASE 2 Y FASE 5)
+       ====================================================================== -->
+  <div id="vistaDashboard" class="vista-seccion" role="tabpanel" aria-labelledby="btnSwitchDashboard" style="display: none;">
+    <div class="dashboard-layout">
+      <!-- Backdrop para móviles al abrir el sidebar -->
+      <div class="sidebar-backdrop" id="sidebarBackdrop" tabindex="-1" aria-hidden="true"></div>
+
+      <!-- Barra lateral (Sidebar) -->
+      <aside class="dashboard-sidebar" id="dashboardSidebar" aria-label="Menú principal de administración">
+        <div class="sidebar-header">
+          <a href="#inicio" class="brand-logo btn-link-landing" aria-label="Ir a la tienda">
+            <span class="brand-icon" aria-hidden="true">🌱</span>
+            <span class="brand-name">Eco<span class="brand-highlight">Market</span></span>
+          </a>
+          <button 
+            type="button" 
+            class="sidebar-close-btn" 
+            id="sidebarCloseBtn" 
+            aria-label="Cerrar barra lateral"
+          >
+            &times;
+          </button>
+        </div>
+
+        <nav class="sidebar-nav">
+          <span class="nav-section-title">ADMINISTRACIÓN</span>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="#kpis" class="sidebar-link active" id="linkResumen">
+                <span class="sidebar-icon" aria-hidden="true">📊</span>
+                <span class="sidebar-text">Resumen &amp; KPIs</span>
+              </a>
+            </li>
+            <li>
+              <a href="#catalogo" class="sidebar-link" id="linkCatalogo">
+                <span class="sidebar-icon" aria-hidden="true">📦</span>
+                <span class="sidebar-text">Catálogo &amp; Inventario</span>
+              </a>
+            </li>
+            <li>
+              <a href="#estadisticas" class="sidebar-link" id="linkEstadisticas">
+                <span class="sidebar-icon" aria-hidden="true">📈</span>
+                <span class="sidebar-text">Gráfico de Categorías</span>
+              </a>
+            </li>
+            <li>
+              <a href="#inicio" class="sidebar-link btn-link-landing" id="linkLanding">
+                <span class="sidebar-icon" aria-hidden="true">🏡</span>
+                <span class="sidebar-text">Ver Tienda (Landing)</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="user-profile-badge">
+            <div class="user-avatar" aria-hidden="true">👨‍🌾</div>
+            <div class="user-details">
+              <span class="user-name">Administrador Eco</span>
+              <span class="user-role">Gestor de Catálogo ADSO</span>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline btn-xs w-100 mt-sm" id="btnRestablecerDataset" title="Recargar dataset original de 35 productos">
+            🔄 Restablecer 35 datos iniciales
+          </button>
+        </div>
+      </aside>
+
+      <!-- Contenido Principal del Dashboard -->
+      <div class="dashboard-main-wrapper">
+        <!-- Topbar -->
+        <header class="dashboard-topbar">
+          <div class="topbar-left">
+            <!-- Botón menú hamburguesa móvil con transición 0.3s -->
+            <button 
+              type="button" 
+              class="hamburger-btn" 
+              id="hamburgerBtn" 
+              aria-label="Abrir barra lateral de navegación" 
+              aria-expanded="false" 
+              aria-controls="dashboardSidebar"
+            >
+              <span class="hamburger-icon" id="hamburgerIcon" aria-hidden="true">☰</span>
+            </button>
+            <div>
+              <h1 class="topbar-title">Panel Administrativo</h1>
+              <p class="topbar-subtitle">Sistema integral de control de catálogo y comercio sostenible</p>
+            </div>
+          </div>
+
+          <div class="topbar-right">
+            <button type="button" class="btn btn-primary" id="btnAbrirModalNuevo">
+              <span aria-hidden="true">➕</span> Agregar producto
+            </button>
+            <button type="button" class="btn btn-outline btn-sm btn-link-landing">
+              <span aria-hidden="true">👁️</span> Ver Tienda
+            </button>
+          </div>
+        </header>
+
+        <!-- Contenedor del contenido -->
+        <main class="dashboard-content">
+          <!-- Banner de Bienvenida -->
+          <section class="welcome-banner" aria-label="Resumen operativo">
+            <div class="welcome-text">
+              <h2>Control de Inventario de Alimentos Orgánicos y Artículos Sostenibles</h2>
+              <p>
+                Consulta indicadores clave en tiempo real, filtra por región o categoría y administra altas, bajas y cambios en el catálogo.
+              </p>
+            </div>
+            <div class="welcome-stats">
+              <span class="pill-badge pill-region">🇨🇴 8 Ciudades activas</span>
+              <span class="pill-badge pill-organic">🌿 100% Trazabilidad</span>
+              <span class="pill-badge pill-chart">💾 Persistencia Local</span>
+            </div>
+          </section>
+
+          <!-- SECCIÓN 1: Tarjetas KPI (Fase 2, Paso 2) -->
+          <section class="kpis-section" id="kpis" aria-labelledby="kpis-heading">
+            <h2 class="visually-hidden" id="kpis-heading">Indicadores Clave de Desempeño (KPI)</h2>
+            <div class="kpi-grid">
+              <!-- KPI 1: Productos Registrados -->
+              <article class="kpi-card" id="kpiCardRegistrados">
+                <div class="kpi-icon-wrap kpi-icon-blue" aria-hidden="true">📦</div>
+                <div class="kpi-body">
+                  <span class="kpi-title">Productos Registrados</span>
+                  <strong class="kpi-value" id="kpiTotalProductos">0</strong>
+                  <p class="kpi-desc">Total de referencias activas en el catálogo</p>
+                </div>
+              </article>
+
+              <!-- KPI 2: Inventario Bajo -->
+              <article class="kpi-card" id="kpiCardBajo">
+                <div class="kpi-icon-wrap kpi-icon-amber" aria-hidden="true">⚠️</div>
+                <div class="kpi-body">
+                  <span class="kpi-title">Inventario Bajo</span>
+                  <strong class="kpi-value text-warning" id="kpiInventarioBajo">0</strong>
+                  <p class="kpi-desc">Stock actual &le; stock mínimo sugerido</p>
+                </div>
+              </article>
+
+              <!-- KPI 3: Valor del Inventario -->
+              <article class="kpi-card" id="kpiCardValor">
+                <div class="kpi-icon-wrap kpi-icon-green" aria-hidden="true">💰</div>
+                <div class="kpi-body">
+                  <span class="kpi-title">Valor del Inventario</span>
+                  <strong class="kpi-value text-success" id="kpiValorInventario">$ 0 COP</strong>
+                  <p class="kpi-desc">Valorización total en pesos colombianos</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <!-- SECCIÓN 2: Barra de Búsqueda, Filtros y Controles (Fase 5, Paso 3) -->
+          <section class="filters-section" id="catalogo" aria-labelledby="catalogo-heading">
+            <div class="filters-header">
+              <div>
+                <h2 class="section-heading" id="catalogo-heading">Catálogo de Productos</h2>
+                <p class="section-subheading">Filtra, busca en tiempo real y gestiona cada referencia disponible.</p>
+              </div>
+
+              <!-- Selector de Vista: Cards / Tabla -->
+              <div class="view-toggles" role="group" aria-label="Cambiar vista de catálogo">
+                <button 
+                  type="button" 
+                  class="btn-toggle active" 
+                  id="btnVistaCards" 
+                  title="Vista de cuadrícula en tarjetas"
+                  aria-pressed="true"
+                >
+                  ▦ Tarjetas
+                </button>
+                <button 
+                  type="button" 
+                  class="btn-toggle" 
+                  id="btnVistaTabla" 
+                  title="Vista tabular de productos"
+                  aria-pressed="false"
+                >
+                  ▤ Tabla
+                </button>
+              </div>
+            </div>
+
+            <!-- Toolbar con controles combinados -->
+            <div class="filters-toolbar">
+              <!-- Búsqueda en tiempo real -->
+              <div class="filter-item filter-search">
+                <label for="inputBusqueda" class="visually-hidden">Buscar producto o productor</label>
+                <div class="search-input-wrapper">
+                  <span class="search-icon" aria-hidden="true">🔍</span>
+                  <input 
+                    type="text" 
+                    id="inputBusqueda" 
+                    class="form-control" 
+                    placeholder="Buscar por producto o productor..." 
+                    autocomplete="off"
+                  >
+                  <button type="button" class="btn-clear-search" id="btnClearSearch" aria-label="Limpiar búsqueda" style="display:none;">&times;</button>
+                </div>
+              </div>
+
+              <!-- Filtro Categoría -->
+              <div class="filter-item">
+                <label for="selectCategoria" class="filter-label">Categoría:</label>
+                <select id="selectCategoria" class="form-control">
+                  <option value="">Todas las categorías</option>
+                  <option value="Frutas y verduras">Frutas y verduras</option>
+                  <option value="Despensa">Despensa</option>
+                  <option value="Cuidado personal">Cuidado personal</option>
+                  <option value="Hogar sostenible">Hogar sostenible</option>
+                </select>
+              </div>
+
+              <!-- Filtro Ciudad -->
+              <div class="filter-item">
+                <label for="selectCiudad" class="filter-label">Ciudad:</label>
+                <select id="selectCiudad" class="form-control">
+                  <option value="">Todas las ciudades</option>
+                  <option value="Bucaramanga">Bucaramanga</option>
+                  <option value="Floridablanca">Floridablanca</option>
+                  <option value="Girón">Girón</option>
+                  <option value="Bogotá">Bogotá</option>
+                  <option value="Medellín">Medellín</option>
+                  <option value="Cali">Cali</option>
+                  <option value="Tunja">Tunja</option>
+                  <option value="Cúcuta">Cúcuta</option>
+                </select>
+              </div>
+
+              <!-- Filtro Estado de Inventario -->
+              <div class="filter-item">
+                <label for="selectEstado" class="filter-label">Estado:</label>
+                <select id="selectEstado" class="form-control">
+                  <option value="">Todos los estados</option>
+                  <option value="Disponible">Disponible</option>
+                  <option value="Stock bajo">Stock bajo</option>
+                  <option value="Agotado">Agotado</option>
+                </select>
+              </div>
+
+              <!-- Botón Limpiar Filtros -->
+              <div class="filter-item filter-action">
+                <button type="button" class="btn btn-secondary w-100" id="btnLimpiarFiltros">
+                  🧹 Limpiar filtros
+                </button>
+              </div>
+            </div>
+
+            <!-- Resumen de resultados -->
+            <div class="results-summary">
+              <span id="contadorResultados">Cargando catálogo...</span>
+            </div>
+
+            <!-- Contenedor 1: Grid de Tarjetas (Fase 5, Paso 2) -->
+            <div class="products-cards-grid" id="contenedorCards" aria-live="polite">
+              <!-- Tarjetas dinámicas inyectadas por app.js -->
+            </div>
+
+            <!-- Contenedor 2: Tabla Responsive de 7 Columnas con Zebra Striping (Fase 2, Paso 3) -->
+            <div class="table-responsive-container" id="contenedorTabla" style="display: none;">
+              <table class="products-table" id="tablaProductos">
+                <thead>
+                  <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Precio COP</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Productor</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col" class="text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="tablaBodyProductos">
+                  <!-- Filas dinámicas inyectadas por app.js -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Estado Vacío -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+              <div class="empty-icon" aria-hidden="true">🍃</div>
+              <h3>No se encontraron productos</h3>
+              <p>No existen coincidencias con los criterios de búsqueda y filtros seleccionados.</p>
+              <button type="button" class="btn btn-outline" id="btnRestaurarDesdeVacio">
+                Restablecer filtros
+              </button>
+            </div>
+          </section>
+
+          <!-- SECCIÓN 3: Gráfico Estadístico de Categorías (Bonus Fase 5, Paso 6) -->
+          <section class="chart-section" id="estadisticas" aria-labelledby="estadisticas-heading">
+            <div class="chart-card">
+              <div class="chart-header">
+                <div>
+                  <h2 class="section-heading" id="estadisticas-heading">Distribución de Productos por Categoría</h2>
+                  <p class="section-subheading">Gráfico estadístico interactivo sincronizado en tiempo real con las operaciones CRUD.</p>
+                </div>
+                <span class="pill-badge pill-chart">📊 Chart.js Dinámico</span>
+              </div>
+              <div class="chart-canvas-wrapper">
+                <canvas id="graficoCategorias" aria-label="Gráfico de barras de productos por categoría" role="img"></canvas>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <!-- Footer Dashboard -->
+        <footer class="dashboard-footer">
+          <p>&copy; 2026 EcoMarket Colombia • Panel de Administración. Proyecto Integrador ADSO.</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL CRUD: CREAR Y EDITAR PRODUCTO (FASE 5, PASO 4)
+       ====================================================================== -->
+  <div class="modal-backdrop" id="modalProductoBackdrop" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="modalTitulo" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modalTitulo">Agregar nuevo producto</h3>
+          <button type="button" class="modal-close-btn" id="modalBtnCerrar" aria-label="Cerrar modal">&times;</button>
+        </div>
+
+        <form id="formProducto" novalidate>
+          <div class="modal-body">
+            <input type="hidden" id="productoId" name="id" value="">
+
+            <div class="form-group">
+              <label for="prodNombre" class="form-label">Nombre del producto *</label>
+              <input 
+                type="text" 
+                id="prodNombre" 
+                class="form-control" 
+                placeholder="Ej. Fresas silvestres orgánicas 500 g" 
+                required 
+                minlength="3" 
+                maxlength="80"
+              >
+              <small class="form-hint">Entre 3 y 80 caracteres descriptivos.</small>
+              <span class="error-msg" id="errProdNombre"></span>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="prodCategoria" class="form-label">Categoría *</label>
+                <select id="prodCategoria" class="form-control" required>
+                  <option value="">Selecciona categoría</option>
+                  <option value="Frutas y verduras">Frutas y verduras</option>
+                  <option value="Despensa">Despensa</option>
+                  <option value="Cuidado personal">Cuidado personal</option>
+                  <option value="Hogar sostenible">Hogar sostenible</option>
+                </select>
+                <span class="error-msg" id="errProdCategoria"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="prodCiudad" class="form-label">Ciudad de origen *</label>
+                <select id="prodCiudad" class="form-control" required>
+                  <option value="">Selecciona ciudad</option>
+                  <option value="Bucaramanga">Bucaramanga</option>
+                  <option value="Floridablanca">Floridablanca</option>
+                  <option value="Girón">Girón</option>
+                  <option value="Bogotá">Bogotá</option>
+                  <option value="Medellín">Medellín</option>
+                  <option value="Cali">Cali</option>
+                  <option value="Tunja">Tunja</option>
+                  <option value="Cúcuta">Cúcuta</option>
+                </select>
+                <span class="error-msg" id="errProdCiudad"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="prodProductor" class="form-label">Productor o Emprendimiento aliado *</label>
+              <input 
+                type="text" 
+                id="prodProductor" 
+                class="form-control" 
+                placeholder="Ej. Huerta Campesina La Palma" 
+                required 
+                minlength="3" 
+                maxlength="80"
+              >
+              <span class="error-msg" id="errProdProductor"></span>
+            </div>
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label for="prodPrecio" class="form-label">Precio ($ COP) *</label>
+                <input 
+                  type="number" 
+                  id="prodPrecio" 
+                  class="form-control" 
+                  placeholder="25000" 
+                  min="100" 
+                  step="100" 
+                  required
+                >
+                <span class="error-msg" id="errProdPrecio"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="prodStock" class="form-label">Stock disponible *</label>
+                <input 
+                  type="number" 
+                  id="prodStock" 
+                  class="form-control" 
+                  placeholder="15" 
+                  min="0" 
+                  step="1" 
+                  required
+                >
+                <span class="error-msg" id="errProdStock"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="prodStockMinimo" class="form-label">Stock mínimo *</label>
+                <input 
+                  type="number" 
+                  id="prodStockMinimo" 
+                  class="form-control" 
+                  placeholder="5" 
+                  min="0" 
+                  step="1" 
+                  required
+                >
+                <span class="error-msg" id="errProdStockMinimo"></span>
+              </div>
+            </div>
+
+            <div class="form-checks-row">
+              <label class="custom-checkbox">
+                <input type="checkbox" id="prodOrganico" checked>
+                <span class="checkbox-box"></span>
+                <span class="checkbox-label">🌱 Certificado Orgánico / Agroecológico</span>
+              </label>
+
+              <label class="custom-checkbox">
+                <input type="checkbox" id="prodActivo" checked>
+                <span class="checkbox-box"></span>
+                <span class="checkbox-label">✅ Producto Activo en Tienda</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" id="modalBtnCancelar">Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="modalBtnGuardar">Guardar producto</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL DE CONFIRMACIÓN PARA ELIMINACIÓN
+       ====================================================================== -->
+  <div class="modal-backdrop" id="modalEliminarBackdrop" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="modalEliminarTitulo" style="display: none;">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header header-danger">
+          <h3 class="modal-title" id="modalEliminarTitulo">Confirmar eliminación</h3>
+          <button type="button" class="modal-close-btn" id="modalEliminarBtnCerrar">&times;</button>
+        </div>
+        <div class="modal-body text-center">
+          <div class="danger-icon" aria-hidden="true">🗑️</div>
+          <p>¿Estás seguro de que deseas eliminar permanentemente este producto del catálogo?</p>
+          <strong id="nombreProductoEliminar" class="d-block mt-xs text-danger"></strong>
+          <small class="text-muted d-block mt-xs">Esta acción actualizará de inmediato la persistencia en localStorage.</small>
+        </div>
+        <div class="modal-footer justify-center">
+          <button type="button" class="btn btn-outline" id="modalEliminarBtnCancelar">No, cancelar</button>
+          <button type="button" class="btn btn-danger" id="modalEliminarBtnConfirmar">Sí, eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor flotante de notificaciones Toast -->
+  <div class="toast-container" id="toastContainer" aria-live="assertive" aria-atomic="true"></div>
+
+  <!-- Scripts del sistema -->
+  <script src="validacion.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
